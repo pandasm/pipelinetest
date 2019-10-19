@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Spinup-Containers') { 
             steps {
-                sh './configurations/docker-compose up' 
+                sh 'docker-compose up' 
             }
         }
         stage('Build') { 
