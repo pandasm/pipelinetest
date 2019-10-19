@@ -5,6 +5,7 @@ import java.net.URL;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
@@ -19,8 +20,12 @@ public class GoogleTest {
 
     @BeforeTest
     public void setUp() throws MalformedURLException {
-        DesiredCapabilities dc = DesiredCapabilities.chrome();
-        driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), dc);
+        //DesiredCapabilities dc = DesiredCapabilities.chrome();
+        
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("headless");
+        
+        driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
         
     }
 
