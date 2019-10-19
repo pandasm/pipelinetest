@@ -32,7 +32,6 @@ public class GoogleTest {
         
         int size = driver.findElements(By.className("rc")).size();
         
-        
         Assert.assertTrue(size >= 10);
     }
     
