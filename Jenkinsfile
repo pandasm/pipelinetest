@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-    	stage('Destroy - Any Running Containers') { 
+    	stage('Destroy - Before Running tests on Containers') { 
             steps {
                 sh 'docker stop $(docker ps -a -q)'
                 sh 'docker rm $(docker ps -a -q)'
@@ -29,7 +29,7 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage('Destroy - Any Running Containers') { 
+        stage('Destroy - After Running tests on Containers') { 
             steps {
                 sh 'docker stop $(docker ps -a -q)'
                 sh 'docker rm $(docker ps -a -q)'
