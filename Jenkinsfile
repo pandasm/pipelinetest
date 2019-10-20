@@ -1,12 +1,6 @@
 pipeline {
     agent any
     stages {
-    	stage('Destroy - Before Running tests on Containers') { 
-            steps {
-                sh 'docker stop $(docker ps -a -q)'
-                sh 'docker rm $(docker ps -a -q)'
-            }
-        }
         stage('Pull latest Code') { 
              steps {
               // Get some code from a GitHub repository
