@@ -3,3 +3,16 @@ selenium-hub:
   image: selenium/hub:latest
   ports:
     - "4444:4444"
+#selenium-chrome
+selenium-chrome:
+  restart: always
+  image: selenium/node-chrome-debug
+  stdin_open: true
+  links:
+    - selenium-hub:hub
+#selenium-firefox
+selenium-firefox:
+  restart: always
+  image: selenium/node-firefox-debug
+  links:
+    - selenium-hub:hub
