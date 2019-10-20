@@ -11,8 +11,12 @@ services:
     image: selenium/node-chrome:latest
     depends_on:
       - hub
+    environment:
+      - HUB_HOST=hub
 
   firefox:
     image: selenium/node-firefox:latest
     depends_on:
       - hub
+    environment:
+      - HUB_HOST=hub
