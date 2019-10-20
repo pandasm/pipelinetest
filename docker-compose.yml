@@ -1,18 +1,22 @@
-selenium-hub:
-  restart: always
-  image: selenium/hub:latest
-  ports:
-    - "4444:4444"
-#selenium-chrome
-selenium-chrome:
-  restart: always
-  image: selenium/node-chrome-debug
-  stdin_open: true
-  links:
-    - selenium-hub:hub
-#selenium-firefox
-selenium-firefox:
-  restart: always
-  image: selenium/node-firefox-debug
-  links:
-    - selenium-hub:hub
+version: '3.7'
+
+services:
+
+  hub:
+    image: selenium/hub:3.141.59
+    ports:
+      - 4444:4444
+
+  chrome:
+    image: selenium/node-chrome:3.141.59
+    depends_on:
+      - hub
+    environment:
+      - HUB_HOST=hub
+
+  firefox:
+    image: selenium/node-firefox:3.141.59
+    depends_on:
+      - hub
+    environment:
+      - HUB_HOST=hub

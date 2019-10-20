@@ -8,9 +8,14 @@ pipeline {
              }
         }
         stage('Spinup-Containers') { 
-            steps {
-                sh 'docker-compose up' 
-            }
+        	parallel{
+        		stage('Selenium-Hub'){
+        			steps {
+                		sh 'docker-compose up' 
+            		}	
+        		}
+        	}
+            
         }
         stage('Build') { 
             steps {
