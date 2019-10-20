@@ -1,22 +1,24 @@
 pipeline {
     agent any
     stages {
+    	stage('Destroy - Any Running Containers') { 
+            steps {
+                sh 'docker stop $(docker ps -a -q)'
+                sh 'docker rm $(docker ps -a -q)'
+            }
+        }
         stage('Preparation') { 
              steps {
               // Get some code from a GitHub repository
               git 'https://github.com/pandasm/pipelinetest.git'
              }
         }
-        stage('Spinup-Containers') { 
-        	parallel{
-        		stage('Selenium-Hub'){
-        			steps {
-                		sh 'docker-compose up' 
-            		}	
-        		}
-        	}
-            
+		stage('spinning up docker images'){
+        	steps {
+                	sh 'docker-compose up -d' 
+             }	
         }
+     
         stage('Build') { 
             steps {
                 sh 'mvn -B -DskipTests clean package' 
@@ -25,12 +27,6 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'mvn test'
-            }
-        }
-        stage('Destroy-Containers') { 
-            steps {
-                sh 'docker stop $(docker ps -a -q)'
-                sh 'docker rm $(docker ps -a -q)'
             }
         }
     }
