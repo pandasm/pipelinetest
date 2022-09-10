@@ -1,5 +1,5 @@
-package sampletest;
 
+package sampletest;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -26,7 +26,7 @@ public class GoogleTest {
         options.addArguments("headless");
         
         driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
-        System.out.println("Initialised the Deiver and sent the script to grid");
+        System.out.println("Initialised the Driver and sent the script to grid");
         
     }
 
@@ -39,10 +39,10 @@ public class GoogleTest {
         driver.findElement(By.name("btnK")).click();
         System.out.println("Clicked on the button");
         
-        int size = driver.findElements(By.className("rc")).size();
-        System.out.println("Retrieving the number of links");
+        int size = driver.findElements(By.tagName("a")).size();
+        System.out.println("Retrieving the number of links " + size);
         
-        Assert.assertTrue(size >= 10);
+        Assert.assertTrue(size >= 130);
         System.out.println("Asseted Successfull");
     }
     
