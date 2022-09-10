@@ -15,6 +15,7 @@ pipeline {
      
         stage('Build') { 
             steps {
+            	sh 'export JAVA_HOME=$(/usr/libexec/java_home)'
                 sh 'mvn -B -DskipTests clean package' 
             }
         }
